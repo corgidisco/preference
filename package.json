@@ -1,0 +1,39 @@
+{
+  "name": "allconf",
+  "version": "0.0.1",
+  "author": "Cris <corgidisco@gmail.com>",
+  "license": "MIT",
+  "main": "dist/index.js",
+  "scripts": {
+    "lint": "./node_modules/.bin/tslint -c ./tslint.json -p tsconfig.json 'src/**/*.ts' --format stylish",
+    "test": "jest test"
+  },
+  "jest": {
+    "transform": {
+      "^.+\\.tsx?$": "./node_modules/ts-jest/preprocessor.js"
+    },
+    "testRegex": "[^/]*\\.(test|spec)\\.(j|t)sx?$",
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js",
+      "jsx",
+      "json"
+    ]
+  },
+  "dependencies": {
+    "fs-extra": "^4.0.2",
+    "js-yaml": "^3.10.0"
+  },
+  "devDependencies": {
+    "@types/fs-extra": "^4.0.3",
+    "@types/jest": "^21.1.5",
+    "@types/js-yaml": "^3.9.1",
+    "jest": "^21.2.1",
+    "ts-jest": "^21.1.4",
+    "ts-node": "^3.3.0",
+    "tslint": "^5.7.0",
+    "tslint-language-service": "^0.9.6",
+    "typescript": "^2.5.3"
+  }
+}
