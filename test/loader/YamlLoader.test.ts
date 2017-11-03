@@ -27,13 +27,12 @@ describe("YamlLoader", () => {
   })
 
   it("cannot load yaml file", async () => {
-    expect.assertions(3)
+    expect.assertions(2)
     try {
       await loader.load(resolve("stubs/unknown.yaml"))
     } catch (e) {
       expect(e.code).toBe("ENOENT")
       expect(e.errno).toBe(-2)
-      expect(e.message).toEqual("ENOENT: no such file or directory, open '/Users/wan2land/Workspace/js/allconf/test/stubs/unknown.yaml'")
     }
   })
 })

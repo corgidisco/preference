@@ -3,6 +3,6 @@ export interface Loader {
   load(path: string): Promise<any>
 }
 
-export interface AllconfOptions {
+export interface PreferenceOptions {
 
 }

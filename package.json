@@ -1,6 +1,6 @@
 {
-  "name": "allconf",
-  "version": "0.0.1",
+  "name": "preference",
+  "version": "0.0.2",
   "author": "Cris <corgidisco@gmail.com>",
   "license": "MIT",
   "main": "dist/index.js",
