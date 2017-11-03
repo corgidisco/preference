@@ -4,7 +4,9 @@
   "author": "Cris <corgidisco@gmail.com>",
   "license": "MIT",
   "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "scripts": {
+    "build": "rimraf ./dist && tsc -d -p .",
     "lint": "./node_modules/.bin/tslint -c ./tslint.json -p tsconfig.json 'src/**/*.ts' --format stylish",
     "test": "jest test"
   },
@@ -30,6 +32,7 @@
     "@types/jest": "^21.1.5",
     "@types/js-yaml": "^3.9.1",
     "jest": "^21.2.1",
+    "rimraf": "^2.6.2",
     "ts-jest": "^21.1.4",
     "ts-node": "^3.3.0",
     "tslint": "^5.7.0",
