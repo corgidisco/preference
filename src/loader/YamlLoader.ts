@@ -8,4 +8,9 @@ export default class YamlLoader implements types.Loader {
     const contents = await fs.readFile(path)
     return yaml.load(contents.toString())
   }
+
+  public loadSync(path: string): any {
+    const contents = fs.readFileSync(path)
+    return yaml.load(contents.toString())
+  }
 }
