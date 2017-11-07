@@ -4,6 +4,11 @@ export interface Loader {
   loadSync(path: string): any
 }
 
-export interface PreferenceOptions {
+export interface TestableLoader extends Loader {
+  test(path: string): boolean
+}
 
+export interface PreferenceOptions {
+  yamlLoader?: Loader,
+  jsonLoader?: Loader,
 }
