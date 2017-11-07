@@ -8,41 +8,43 @@ function resolve(...dir: string[]): string {
   return path.resolve(__dirname, "..", ...dir)
 }
 
+const expected = {
+  database: {
+    mysql: {
+      host: "localhost",
+      username: "root",
+      password: "root",
+    },
+  },
+  yaml: {
+    array: [10, 20, 30],
+    bar: 1010,
+    baz: 10.1,
+    foo: "foo string",
+    object: {
+      object1: "object 1",
+      object2: "object 1",
+    },
+  },
+  json: {
+    array: [10, 20, 30],
+    bar: 1010,
+    baz: 10.1,
+    foo: "foo string",
+    object: {
+      object1: "object 1",
+      object2: "object 1",
+    },
+  },
+}
+
 describe("Preference", () => {
 
   const pref = new Preference()
 
   it("load success", async () => {
     expect.assertions(1)
-    await expect(pref.load(resolve("test/stubs"))).resolves.toEqual({
-      database: {
-        mysql: {
-          host: "localhost",
-          username: "root",
-          password: "root",
-        },
-      },
-      yaml: {
-        array: [10, 20, 30],
-        bar: 1010,
-        baz: 10.1,
-        foo: "foo string",
-        object: {
-          object1: "object 1",
-          object2: "object 1",
-        },
-      },
-      json: {
-        array: [10, 20, 30],
-        bar: 1010,
-        baz: 10.1,
-        foo: "foo string",
-        object: {
-          object1: "object 1",
-          object2: "object 1",
-        },
-      },
-    })
+    await expect(pref.load(resolve("test/stubs"))).resolves.toEqual(expected)
   })
 
   // it("load fail", async () => {
@@ -55,19 +57,10 @@ describe("Preference", () => {
   //   }
   // })
 
-  // it("loadSync success", () => {
-  //   expect.assertions(1)
-  //   expect(loader.loadSync(resolve("stubs/yaml.yaml"))).toEqual({
-  //     array: [10, 20, 30],
-  //     bar: 1010,
-  //     baz: 10.1,
-  //     foo: "foo string",
-  //     object: {
-  //       object1: "object 1",
-  //       object2: "object 1",
-  //     },
-  //   })
-  // })
+  it("loadSync success", () => {
+    expect.assertions(1)
+    expect(pref.loadSync(resolve("test/stubs"))).toEqual(expected)
+  })
 
   // it("loadSync fail", () => {
   //   expect.assertions(2)

@@ -43,6 +43,27 @@ export default class Preference {
   }
 
   public loadSync(path: string): any {
-    return ""
+    const result = {}
+    for (const file of fs.readdirSync(path)) {
+      const filePath = resolve(path, file)
+      const fileObj = fs.lstatSync(filePath)
+      if (fileObj.isFile()) {
+        switch (extname(filePath)) {
+          case ".yaml":
+            if (this.options.yamlLoader) {
+              result[basename(filePath, ".yaml")] = this.options.yamlLoader.loadSync(filePath)
+            }
+            break
+          case ".json":
+            if (this.options.jsonLoader) {
+              result[basename(filePath, ".json")] = this.options.jsonLoader.loadSync(filePath)
+            }
+            break
+        }
+      } else {
+        result[basename(filePath)] = this.loadSync(filePath)
+      }
+    }
+    return result
   }
 }
