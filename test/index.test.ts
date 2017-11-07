@@ -1,7 +1,8 @@
 
 import {} from "jest"
 
-import Preference from "../src/Preference"
+import pref from "../src/index"
+import {create, load as prefLoad, loadSync as prefLoadSync} from "../src/index"
 import path from "path"
 
 function resolve(...dir: string[]): string {
@@ -58,37 +59,24 @@ const expected = {
   },
 }
 
-describe("Preference", () => {
-
-  const pref = new Preference()
-
-  it("load success", async () => {
+describe("preference", () => {
+  it("default load success", async () => {
     expect.assertions(1)
     await expect(pref.load(resolve("test/stubs"))).resolves.toEqual(expected)
   })
 
-  it("load fail", async () => {
-    expect.assertions(2)
-    try {
-      await pref.load(resolve("stubs/unknown"))
-    } catch (e) {
-      expect(e.code).toBe("ENOENT")
-      expect(e.errno).toBe(-2)
-    }
-  })
-
-  it("loadSync success", () => {
+  it("default loadSync success", () => {
     expect.assertions(1)
     expect(pref.loadSync(resolve("test/stubs"))).toEqual(expected)
   })
 
-  it("loadSync fail", () => {
-    expect.assertions(2)
-    try {
-      pref.loadSync(resolve("stubs/unknown"))
-    } catch (e) {
-      expect(e.code).toBe("ENOENT")
-      expect(e.errno).toBe(-2)
-    }
+  it("direct load success", async () => {
+    expect.assertions(1)
+    await expect(prefLoad(resolve("test/stubs"))).resolves.toEqual(expected)
+  })
+
+  it("direct loadSync success", () => {
+    expect.assertions(1)
+    expect(prefLoadSync(resolve("test/stubs"))).toEqual(expected)
   })
 })

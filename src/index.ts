@@ -1,6 +1,14 @@
 
 import Preference from "./Preference"
+import * as types from "./types"
 
-const preference = new Preference()
+export function create(options?: types.PreferenceOptions): Preference {
+  return new Preference(options)
+}
 
-export const load = preference.load
+const preference = create()
+
+export default preference
+
+export const load = preference.load.bind(preference)
+export const loadSync = preference.loadSync.bind(preference)
