@@ -11,4 +11,6 @@ export interface TestableLoader extends Loader {
 export interface PreferenceOptions {
   yamlLoader?: Loader,
   jsonLoader?: Loader,
+  tomlLoader?: Loader,
+  iniLoader?: Loader,
 }

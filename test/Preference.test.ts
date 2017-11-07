@@ -16,6 +16,16 @@ const expected = {
       password: "root",
     },
   },
+  ini: {
+    array: ["10", "20", "30"],
+    bar: "1010",
+    baz: "10.1",
+    foo: "foo string",
+    object: {
+      object1: "object 1",
+      object2: "object 1",
+    },
+  },
   yaml: {
     array: [10, 20, 30],
     bar: 1010,
@@ -27,6 +37,16 @@ const expected = {
     },
   },
   json: {
+    array: [10, 20, 30],
+    bar: 1010,
+    baz: 10.1,
+    foo: "foo string",
+    object: {
+      object1: "object 1",
+      object2: "object 1",
+    },
+  },
+  toml: {
     array: [10, 20, 30],
     bar: 1010,
     baz: 10.1,

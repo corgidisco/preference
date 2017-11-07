@@ -4,6 +4,8 @@ import {resolve, extname, basename} from "path"
 import * as types from "./types"
 import yamlLoader from "./loader/yaml-loader"
 import jsonLoader from "./loader/json-loader"
+import iniLoader from "./loader/ini-loader"
+import tomlLoader from "./loader/toml-loader"
 
 export default class Preference {
 
@@ -13,6 +15,8 @@ export default class Preference {
     this.options = options || {
       yamlLoader,
       jsonLoader,
+      tomlLoader,
+      iniLoader,
     }
   }
 
@@ -31,6 +35,16 @@ export default class Preference {
           case ".json":
             if (this.options.jsonLoader) {
               result[basename(filePath, ".json")] = await this.options.jsonLoader.load(filePath)
+            }
+            break
+          case ".ini":
+            if (this.options.iniLoader) {
+              result[basename(filePath, ".ini")] = await this.options.iniLoader.load(filePath)
+            }
+            break
+          case ".toml":
+            if (this.options.tomlLoader) {
+              result[basename(filePath, ".toml")] = await this.options.tomlLoader.load(filePath)
             }
             break
         }
@@ -57,6 +71,16 @@ export default class Preference {
           case ".json":
             if (this.options.jsonLoader) {
               result[basename(filePath, ".json")] = this.options.jsonLoader.loadSync(filePath)
+            }
+            break
+          case ".ini":
+            if (this.options.iniLoader) {
+              result[basename(filePath, ".ini")] = this.options.iniLoader.loadSync(filePath)
+            }
+            break
+          case ".toml":
+            if (this.options.tomlLoader) {
+              result[basename(filePath, ".toml")] = this.options.tomlLoader.loadSync(filePath)
             }
             break
         }
