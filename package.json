@@ -3,6 +3,10 @@
   "version": "0.0.2",
   "author": "Cris <corgidisco@gmail.com>",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/corgidisco/preference.git"
+  },
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
