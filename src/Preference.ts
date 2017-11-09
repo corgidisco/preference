@@ -6,6 +6,7 @@ import yamlLoader from "./loader/yaml-loader"
 import jsonLoader from "./loader/json-loader"
 import iniLoader from "./loader/ini-loader"
 import tomlLoader from "./loader/toml-loader"
+import dotenvLoader from "./loader/dotenv-loader"
 
 export default class Preference {
 
@@ -13,6 +14,7 @@ export default class Preference {
 
   constructor(options?: types.PreferenceOptions) {
     this.options = options || {
+      dotenvLoader,
       yamlLoader,
       jsonLoader,
       tomlLoader,
@@ -26,6 +28,10 @@ export default class Preference {
       const filePath = resolve(path, file)
       const fileObj = await (fs.lstat(filePath))
       if (fileObj.isFile()) {
+        if (file === ".env" && this.options.dotenvLoader) {
+          Object.assign(result, await this.options.dotenvLoader.load(filePath))
+          continue
+        }
         switch (extname(filePath)) {
           case ".yaml":
             if (this.options.yamlLoader) {
@@ -62,6 +68,10 @@ export default class Preference {
       const filePath = resolve(path, file)
       const fileObj = fs.lstatSync(filePath)
       if (fileObj.isFile()) {
+        if (file === ".env" && this.options.dotenvLoader) {
+          Object.assign(result, this.options.dotenvLoader.loadSync(filePath))
+          continue
+        }
         switch (extname(filePath)) {
           case ".yaml":
             if (this.options.yamlLoader) {

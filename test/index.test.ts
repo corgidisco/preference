@@ -10,6 +10,8 @@ function resolve(...dir: string[]): string {
 }
 
 const expected = {
+  DEBUG: "true",
+  ENV: "production",
   database: {
     mysql: {
       host: "localhost",

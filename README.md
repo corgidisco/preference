@@ -1,5 +1,4 @@
-Preference
-==========
+# Preference
 
 ## Install
 

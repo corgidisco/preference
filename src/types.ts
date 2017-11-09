@@ -9,6 +9,7 @@ export interface TestableLoader extends Loader {
 }
 
 export interface PreferenceOptions {
+  dotenvLoader?: Loader,
   yamlLoader?: Loader,
   jsonLoader?: Loader,
   tomlLoader?: Loader,
