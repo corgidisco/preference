@@ -1,5 +1,5 @@
 
-import fs from "fs-extra"
+import * as fs from "fs-extra"
 import {resolve, extname, basename} from "path"
 import * as types from "./types"
 import yamlLoader from "./loader/yaml-loader"
@@ -23,7 +23,7 @@ export default class Preference {
   }
 
   public async load(path: string): Promise<any> {
-    const result = {}
+    const result: any = {}
     for (const file of (await fs.readdir(path))) {
       const filePath = resolve(path, file)
       const fileObj = await (fs.lstat(filePath))
@@ -63,7 +63,7 @@ export default class Preference {
   }
 
   public loadSync(path: string): any {
-    const result = {}
+    const result: any = {}
     for (const file of fs.readdirSync(path)) {
       const filePath = resolve(path, file)
       const fileObj = fs.lstatSync(filePath)

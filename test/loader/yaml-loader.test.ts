@@ -1,8 +1,8 @@
 
 import {} from "jest"
 
-import loader from "../../src/loader/yaml-loader"
-import path from "path"
+import loader from "../../dist/loader/yaml-loader"
+import * as path from "path"
 
 function resolve(...dir: string[]): string {
   return path.resolve(__dirname, "..", ...dir)

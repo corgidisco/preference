@@ -1,8 +1,8 @@
 
 import {} from "jest"
 
-import Preference from "../src/Preference"
-import path from "path"
+import Preference from "../dist/Preference"
+import * as path from "path"
 
 function resolve(...dir: string[]): string {
   return path.resolve(__dirname, "..", ...dir)

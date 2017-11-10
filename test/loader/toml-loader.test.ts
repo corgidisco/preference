@@ -1,8 +1,8 @@
 
 import {} from "jest"
 
-import loader from "../../src/loader/toml-loader"
-import path from "path"
+import loader from "../../dist/loader/toml-loader"
+import * as path from "path"
 
 function resolve(...dir: string[]): string {
   return path.resolve(__dirname, "..", ...dir)

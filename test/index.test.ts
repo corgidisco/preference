@@ -1,9 +1,9 @@
 
 import {} from "jest"
 
-import pref from "../src/index"
-import {create, load as prefLoad, loadSync as prefLoadSync} from "../src/index"
-import path from "path"
+import pref from "../dist/index"
+import {create, load as prefLoad, loadSync as prefLoadSync} from "../dist/index"
+import * as path from "path"
 
 function resolve(...dir: string[]): string {
   return path.resolve(__dirname, "..", ...dir)

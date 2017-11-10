@@ -11,9 +11,9 @@
   "types": "dist/index.d.ts",
   "scripts": {
     "prepublish": "npm run build",
-    "build": "rimraf ./dist && tsc -d -p .",
+    "build": "rimraf ./dist && tsc -p .",
     "lint": "./node_modules/.bin/tslint -c ./tslint.json -p tsconfig.json 'src/**/*.ts' --format stylish",
-    "test": "jest test"
+    "test": "npm run build && jest test"
   },
   "jest": {
     "transform": {

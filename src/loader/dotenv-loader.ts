@@ -1,5 +1,5 @@
 
-import fs from "fs-extra"
+import * as fs from "fs-extra"
 import {Loader} from "../types"
 
 const loader: Loader = {
