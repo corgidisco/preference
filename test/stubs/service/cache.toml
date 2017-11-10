@@ -1,0 +1,5 @@
+
+[default]
+database = "redis"
+table = "caches"
+prefix = "cache_"

@@ -12,51 +12,44 @@ function resolve(...dir: string[]): string {
 const expected = {
   DEBUG: "true",
   ENV: "production",
-  database: {
-    mysql: {
+  cache: {
+    default: {
+      database: "redis",
+      prefix: "cache_",
+      table: "caches",
+    },
+  },
+  client: {
+    server: {
       host: "localhost",
-      username: "root",
+      middleware: [
+        "middleware1",
+        "middleware2",
+        "middleware3",
+      ],
+      port: "8080",
+    },
+  },
+  database: {
+    keyvalue: {
+      driver: "redis",
+      host: "localhost",
+      port: 6379,
+    },
+    master: {
+      driver: "mysql",
+      host: "localhost",
       password: "root",
+      port: 3306,
+      username: "root",
     },
-  },
-  ini: {
-    array: ["10", "20", "30"],
-    bar: "1010",
-    baz: "10.1",
-    foo: "foo string",
-    object: {
-      object1: "object 1",
-      object2: "object 1",
-    },
-  },
-  yaml: {
-    array: [10, 20, 30],
-    bar: 1010,
-    baz: 10.1,
-    foo: "foo string",
-    object: {
-      object1: "object 1",
-      object2: "object 1",
-    },
-  },
-  json: {
-    array: [10, 20, 30],
-    bar: 1010,
-    baz: 10.1,
-    foo: "foo string",
-    object: {
-      object1: "object 1",
-      object2: "object 1",
-    },
-  },
-  toml: {
-    array: [10, 20, 30],
-    bar: 1010,
-    baz: 10.1,
-    foo: "foo string",
-    object: {
-      object1: "object 1",
-      object2: "object 1",
+    slave: {
+      database: "slave",
+      driver: "mysql",
+      host: "localhost",
+      password: "slave",
+      port: 3306,
+      username: "slave",
     },
   },
 }
@@ -64,21 +57,21 @@ const expected = {
 describe("preference", () => {
   it("default load success", async () => {
     expect.assertions(1)
-    await expect(pref.load(resolve("test/stubs"))).resolves.toEqual(expected)
+    await expect(pref.load(resolve("test/stubs/service"))).resolves.toEqual(expected)
   })
 
   it("default loadSync success", () => {
     expect.assertions(1)
-    expect(pref.loadSync(resolve("test/stubs"))).toEqual(expected)
+    expect(pref.loadSync(resolve("test/stubs/service"))).toEqual(expected)
   })
 
   it("direct load success", async () => {
     expect.assertions(1)
-    await expect(prefLoad(resolve("test/stubs"))).resolves.toEqual(expected)
+    await expect(prefLoad(resolve("test/stubs/service"))).resolves.toEqual(expected)
   })
 
   it("direct loadSync success", () => {
     expect.assertions(1)
-    expect(prefLoadSync(resolve("test/stubs"))).toEqual(expected)
+    expect(prefLoadSync(resolve("test/stubs/service"))).toEqual(expected)
   })
 })

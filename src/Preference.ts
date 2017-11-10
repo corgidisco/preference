@@ -32,25 +32,29 @@ export default class Preference {
           Object.assign(result, await this.options.dotenvLoader.load(filePath))
           continue
         }
-        switch (extname(filePath)) {
+        const fileExt = extname(filePath)
+        switch (fileExt.toLowerCase()) {
           case ".yaml":
+          case ".yml":
             if (this.options.yamlLoader) {
-              result[basename(filePath, ".yaml")] = await this.options.yamlLoader.load(filePath)
+              result[basename(filePath, fileExt)] = await this.options.yamlLoader.load(filePath)
             }
             break
           case ".json":
             if (this.options.jsonLoader) {
-              result[basename(filePath, ".json")] = await this.options.jsonLoader.load(filePath)
+              result[basename(filePath, fileExt)] = await this.options.jsonLoader.load(filePath)
             }
             break
           case ".ini":
+          case ".cfg":
+          case ".conf":
             if (this.options.iniLoader) {
-              result[basename(filePath, ".ini")] = await this.options.iniLoader.load(filePath)
+              result[basename(filePath, fileExt)] = await this.options.iniLoader.load(filePath)
             }
             break
           case ".toml":
             if (this.options.tomlLoader) {
-              result[basename(filePath, ".toml")] = await this.options.tomlLoader.load(filePath)
+              result[basename(filePath, fileExt)] = await this.options.tomlLoader.load(filePath)
             }
             break
         }
@@ -72,25 +76,29 @@ export default class Preference {
           Object.assign(result, this.options.dotenvLoader.loadSync(filePath))
           continue
         }
-        switch (extname(filePath)) {
+        const fileExt = extname(filePath)
+        switch (fileExt.toLowerCase()) {
           case ".yaml":
+          case ".yml":
             if (this.options.yamlLoader) {
-              result[basename(filePath, ".yaml")] = this.options.yamlLoader.loadSync(filePath)
+              result[basename(filePath, fileExt)] = this.options.yamlLoader.loadSync(filePath)
             }
             break
           case ".json":
             if (this.options.jsonLoader) {
-              result[basename(filePath, ".json")] = this.options.jsonLoader.loadSync(filePath)
+              result[basename(filePath, fileExt)] = this.options.jsonLoader.loadSync(filePath)
             }
             break
           case ".ini":
+          case ".cfg":
+          case ".conf":
             if (this.options.iniLoader) {
-              result[basename(filePath, ".ini")] = this.options.iniLoader.loadSync(filePath)
+              result[basename(filePath, fileExt)] = this.options.iniLoader.loadSync(filePath)
             }
             break
           case ".toml":
             if (this.options.tomlLoader) {
-              result[basename(filePath, ".toml")] = this.options.tomlLoader.loadSync(filePath)
+              result[basename(filePath, fileExt)] = this.options.tomlLoader.loadSync(filePath)
             }
             break
         }
