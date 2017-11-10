@@ -14,4 +14,5 @@ export interface PreferenceOptions {
   jsonLoader?: Loader,
   tomlLoader?: Loader,
   iniLoader?: Loader,
+  noIgnoreErrors?: boolean, // default false
 }
