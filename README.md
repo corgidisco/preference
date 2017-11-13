@@ -15,63 +15,59 @@ import pref from "preference"
 
 // promise
 pref.load("./your_config_directory").then(/* ... */)
+await pref.load("./your_config_directory") // you can use promise by await
 
 // sync
 pref.loadSync("./your_config_directory")
 ```
 
-[Example Directory](https://github.com/corgidisco/preference/tree/master/test/stubs)
+[Example Directory](https://github.com/corgidisco/preference/tree/master/test/stubs/service)
 
 ### output
 
 ```json
 {
-  database: {
-    mysql: {
-      host: "localhost",
-      username: "root",
-      password: "root",
-    },
+  "DEBUG": "true",
+  "ENV": "production",
+  "cache": {
+    "default": {
+      "database": "redis",
+      "prefix": "cache_",
+      "table": "caches"
+    }
   },
-  ini: {
-    array: ["10", "20", "30"],
-    bar: "1010",
-    baz: "10.1",
-    foo: "foo string",
-    object: {
-      object1: "object 1",
-      object2: "object 1",
-    },
+  "client": {
+    "server": {
+      "host": "localhost",
+      "middleware": [
+        "middleware1",
+        "middleware2",
+        "middleware3"
+      ],
+      "port": "8080"
+    }
   },
-  yaml: {
-    array: [10, 20, 30],
-    bar: 1010,
-    baz: 10.1,
-    foo: "foo string",
-    object: {
-      object1: "object 1",
-      object2: "object 1",
+  "database": {
+    "keyvalue": {
+      "driver": "redis",
+      "host": "localhost",
+      "port": 6379
     },
-  },
-  json: {
-    array: [10, 20, 30],
-    bar: 1010,
-    baz: 10.1,
-    foo: "foo string",
-    object: {
-      object1: "object 1",
-      object2: "object 1",
+    "master": {
+      "driver": "mysql",
+      "host": "localhost",
+      "password": "root",
+      "port": 3306,
+      "username": "root"
     },
-  },
-  toml: {
-    array: [10, 20, 30],
-    bar: 1010,
-    baz: 10.1,
-    foo: "foo string",
-    object: {
-      object1: "object 1",
-      object2: "object 1",
-    },
+    "slave": {
+      "database": "slave",
+      "driver": "mysql",
+      "host": "localhost",
+      "password": "slave",
+      "port": 3306,
+      "username": "slave"
+    }
   }
 }
 ```
