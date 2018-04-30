@@ -1,5 +1,6 @@
 
 export interface Loader {
+  test(filename: string): boolean
   load(path: string): Promise<any>
   loadSync(path: string): any
 }
@@ -9,10 +10,6 @@ export interface TestableLoader extends Loader {
 }
 
 export interface PreferenceOptions {
-  dotenvLoader?: Loader,
-  yamlLoader?: Loader,
-  jsonLoader?: Loader,
-  tomlLoader?: Loader,
-  iniLoader?: Loader,
-  noIgnoreErrors?: boolean, // default false
+  noIgnoreErrors?: boolean // default false
+  loaders?: Loader[]
 }

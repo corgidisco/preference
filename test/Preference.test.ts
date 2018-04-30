@@ -71,7 +71,10 @@ const yamlOnlyPrefExpected = {
   },
 }
 
-const errorOccuredLoader: Loader = {
+const errorOccuredYamlLoader: Loader = {
+  test(filename: string): boolean {
+    return /\.ya?ml$/.test(filename)
+  },
   async load(path: string): Promise<any> {
     require("wrong_package_name")
   },
@@ -102,7 +105,9 @@ describe("Preference.load", () => {
   it("will be with yaml only", async () => {
     expect.assertions(1)
     const yamlOnlyPref = new Preference({
-      yamlLoader: require("../dist/loader/yaml-loader").default,
+      loaders: [
+        require("../dist/loader/yaml-loader").default,
+      ],
     })
     await expect(yamlOnlyPref.load(resolve("test/stubs/service")))
       .resolves
@@ -112,7 +117,9 @@ describe("Preference.load", () => {
   it("error in loader but success", async () => {
     expect.assertions(1)
     const errorPref = new Preference({
-      yamlLoader: errorOccuredLoader,
+      loaders: [
+        errorOccuredYamlLoader,
+      ],
     })
     await expect(errorPref.load(resolve("test/stubs/service")))
       .resolves
@@ -122,7 +129,9 @@ describe("Preference.load", () => {
   it("error in loader", async () => {
     expect.assertions(2)
     const errorPref = new Preference({
-      yamlLoader: errorOccuredLoader,
+      loaders: [
+        errorOccuredYamlLoader,
+      ],
       noIgnoreErrors: true,
     })
     try {
@@ -156,7 +165,9 @@ describe("Preference.loadSync", () => {
   it("will be with yaml only", () => {
     expect.assertions(1)
     const yamlOnlyPref = new Preference({
-      yamlLoader: require("../dist/loader/yaml-loader").default,
+      loaders: [
+        require("../dist/loader/yaml-loader").default,
+      ],
     })
     expect(yamlOnlyPref.loadSync(resolve("test/stubs/service")))
       .toEqual(yamlOnlyPrefExpected)
@@ -165,7 +176,9 @@ describe("Preference.loadSync", () => {
   it("error in loader but success", () => {
     expect.assertions(1)
     const errorPref = new Preference({
-      yamlLoader: errorOccuredLoader,
+      loaders: [
+        errorOccuredYamlLoader,
+      ],
     })
     expect(errorPref.loadSync(resolve("test/stubs/service")))
       .toEqual({database: {}})
@@ -174,7 +187,9 @@ describe("Preference.loadSync", () => {
   it("error in loader", () => {
     expect.assertions(2)
     const errorPref = new Preference({
-      yamlLoader: errorOccuredLoader,
+      loaders: [
+        errorOccuredYamlLoader,
+      ],
       noIgnoreErrors: true,
     })
     try {

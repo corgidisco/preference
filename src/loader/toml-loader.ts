@@ -3,6 +3,9 @@ import * as fs from "fs-extra"
 import {Loader} from "../types"
 
 const loader: Loader = {
+  test(filename: string): boolean {
+    return /\.toml$/i.test(filename)
+  },
   async load(path: string): Promise<any> {
     const contents = await fs.readFile(path)
     return require("toml").parse(contents.toString())
