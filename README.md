@@ -27,8 +27,6 @@ pref.loadSync("./your_config_directory")
 
 ```json
 {
-  "DEBUG": "true",
-  "ENV": "production",
   "cache": {
     "default": {
       "database": "redis",
@@ -74,6 +72,7 @@ pref.loadSync("./your_config_directory")
 
 ## Formats
 
+- `js` (built-in)
 - `json` (built-in)
 - `ini` (require `npm install ini --save`)
 - `yaml` (require `npm install js-yaml --save`)
