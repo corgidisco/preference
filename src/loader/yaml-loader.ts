@@ -1,5 +1,5 @@
 
-import * as fs from "fs-extra"
+import * as fs from "fs"
 import {Loader} from "../types"
 
 const loader: Loader = {
@@ -7,7 +7,15 @@ const loader: Loader = {
     return /\.ya?ml$/i.test(filename)
   },
   async load(path: string): Promise<any> {
-    const contents = await fs.readFile(path)
+    const contents = await new Promise((resolve, reject) => {
+      fs.readFile(path, (err, data) => {
+        if (err) {
+          reject(err)
+          return
+        }
+        resolve(data)
+      })
+    })
     return require("js-yaml").load(contents.toString())
   },
   loadSync(path: string): any {
