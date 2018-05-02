@@ -10,8 +10,6 @@ function resolve(...dir: string[]): string {
 }
 
 const expected = {
-  DEBUG: "true",
-  ENV: "production",
   cache: {
     default: {
       database: "redis",

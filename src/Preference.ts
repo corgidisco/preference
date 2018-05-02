@@ -6,7 +6,6 @@ import yamlLoader from "./loader/yaml-loader"
 import jsonLoader from "./loader/json-loader"
 import iniLoader from "./loader/ini-loader"
 import tomlLoader from "./loader/toml-loader"
-import dotenvLoader from "./loader/dotenv-loader"
 
 export default class Preference {
 
@@ -15,7 +14,6 @@ export default class Preference {
   constructor(options?: types.PreferenceOptions) {
     this.options = Object.assign({
       loaders: [
-        dotenvLoader,
         yamlLoader,
         jsonLoader,
         tomlLoader,
