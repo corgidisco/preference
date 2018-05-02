@@ -1,5 +1,5 @@
 
-import * as fs from "fs"
+import * as fs from "../util/fs"
 import {Loader} from "../types"
 
 const loader: Loader = {
@@ -7,15 +7,7 @@ const loader: Loader = {
     return /\.(ini|cfg|conf)$/i.test(filename)
   },
   async load(path: string): Promise<any> {
-    const contents = await new Promise((resolve, reject) => {
-      fs.readFile(path, (err, data) => {
-        if (err) {
-          reject(err)
-          return
-        }
-        resolve(data)
-      })
-    })
+    const contents = await fs.readFile(path)
     return require("ini").decode(contents.toString())
   },
   loadSync(path: string): any {
