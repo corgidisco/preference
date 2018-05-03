@@ -1,5 +1,4 @@
 
 [default]
-database = "redis"
-table = "caches"
-prefix = "cache_"
+username = "<%=process.env.CACHE_USERNAME%>"
+password = "<%=process.env.CACHE_PASSWORD%>"

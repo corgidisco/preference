@@ -1,4 +1,9 @@
 
+export interface FileReader {
+  readFile(path: string): Promise<string>
+  readFileSync(path: string): string
+}
+
 export interface Loader {
   test(filename: string): boolean
   load(path: string): Promise<any>

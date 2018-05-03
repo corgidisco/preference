@@ -4,50 +4,47 @@ import {} from "jest"
 import Preference from "../dist/Preference"
 import {resolve as pathResolve} from "path"
 import {Loader} from "../src/types"
+import * as dotenv from "dotenv"
 
 function resolve(...dir: string[]): string {
   return pathResolve(__dirname, "..", ...dir)
 }
 
+dotenv.config({
+  path: resolve("test/stubs/service"),
+})
+
 const expected = {
   cache: {
     default: {
-      database: "redis",
-      prefix: "cache_",
-      table: "caches",
+      username: "cache",
+      password: "cache123",
     },
   },
   client: {
-    server: {
-      host: "localhost",
+    api: {
+      host: "127.0.0.1",
       middleware: [
-        "middleware1",
-        "middleware2",
-        "middleware3",
+        "cors",
+        "auth",
       ],
       port: "8080",
     },
   },
   database: {
     keyvalue: {
-      driver: "redis",
       host: "localhost",
       port: 6379,
     },
     master: {
-      driver: "mysql",
       host: "localhost",
-      password: "root",
-      port: 3306,
-      username: "root",
+      username: "master",
+      password: "master123",
     },
     slave: {
-      database: "slave",
-      driver: "mysql",
-      host: "localhost",
-      password: "slave",
-      port: 3306,
+      host: "slavehost",
       username: "slave",
+      password: "slave123",
     },
   },
 }
@@ -55,16 +52,13 @@ const expected = {
 const yamlOnlyPrefExpected = {
   database: {
     keyvalue: {
-      driver: "redis",
       host: "localhost",
       port: 6379,
     },
     master: {
-      driver: "mysql",
       host: "localhost",
-      password: "root",
-      port: 3306,
-      username: "root",
+      username: "master",
+      password: "master123",
     },
   },
 }
@@ -82,6 +76,10 @@ const errorOccuredYamlLoader: Loader = {
 }
 
 describe("Preference.load", () => {
+
+  dotenv.config({
+    path: resolve("test/stubs/service/.env"),
+  })
 
   const pref = new Preference()
 

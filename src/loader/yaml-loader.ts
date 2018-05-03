@@ -1,18 +1,21 @@
 
 import * as fs from "../util/fs"
+import * as template from "../template"
 import {Loader} from "../types"
+
+function parse(contents: Buffer): string {
+  return require("js-yaml").load(template.createWithCache(contents.toString())({}))
+}
 
 const loader: Loader = {
   test(filename: string): boolean {
     return /\.ya?ml$/i.test(filename)
   },
   async load(path: string): Promise<any> {
-    const contents = await fs.readFile(path)
-    return require("js-yaml").load(contents.toString())
+    return parse(await fs.readFile(path))
   },
   loadSync(path: string): any {
-    const contents = fs.readFileSync(path)
-    return require("js-yaml").load(contents.toString())
+    return parse(fs.readFileSync(path))
   },
 }
 

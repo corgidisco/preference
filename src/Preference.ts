@@ -6,6 +6,7 @@ import yamlLoader from "./loader/yaml-loader"
 import jsonLoader from "./loader/json-loader"
 import iniLoader from "./loader/ini-loader"
 import tomlLoader from "./loader/toml-loader"
+import jsLoader from "./loader/js-loader"
 
 export default class Preference {
 
@@ -18,6 +19,7 @@ export default class Preference {
         jsonLoader,
         tomlLoader,
         iniLoader,
+        jsLoader,
       ],
     }, options)
   }
