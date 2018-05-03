@@ -20,7 +20,7 @@ export function create(context: string): (data: any) => string {
   const func = "return function(obj){obj=obj||{};with(obj){return'"
     + context
       .replace(/['\n\r\u2028\u2029\\]/g, (match) => `\\${stringEscapes[match]}`)
-      .replace(/<%=([\s\S]+?)%>/g, (_, match) => `'+${match}+'`)
+      .replace(/<%=([\s\S]+?)%>/g, (_, match) => `'+(${match})+'`)
     + "'}}"
 
   return (Function(func))() as (data: any) => string
