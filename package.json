@@ -1,6 +1,7 @@
 {
   "name": "preference",
   "version": "0.1.1",
+  "description": "load all config files(yaml, json, toml, ini) and directory into one object",
   "author": "Cris <corgidisco@gmail.com>",
   "license": "MIT",
   "repository": {
