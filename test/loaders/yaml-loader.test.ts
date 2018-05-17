@@ -1,7 +1,7 @@
 
 import {} from "jest"
 
-import loader from "../../dist/loader/yaml-loader"
+import {YamlLoader} from "../../dist/loaders/yaml-loader"
 import * as path from "path"
 
 function resolve(...dir: string[]): string {
@@ -20,6 +20,8 @@ const expected = {
 }
 
 describe("yaml-loader", () => {
+
+  const loader = new YamlLoader()
 
   it("load success", async () => {
     expect.assertions(1)

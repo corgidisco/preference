@@ -1,7 +1,7 @@
 
 import {} from "jest"
 
-import loader from "../../dist/loader/toml-loader"
+import {JsLoader} from "../../dist/loaders/js-loader"
 import * as path from "path"
 
 function resolve(...dir: string[]): string {
@@ -19,35 +19,35 @@ const expected = {
   },
 }
 
-describe("toml-loader", () => {
+describe("js-loader", () => {
+
+  const loader = new JsLoader()
 
   it("load success", async () => {
     expect.assertions(1)
-    await expect(loader.load(resolve("stubs/toml.toml"))).resolves.toEqual(expected)
+    await expect(loader.load(resolve("stubs/js.js"))).resolves.toEqual(expected)
   })
 
   it("load fail", async () => {
-    expect.assertions(2)
+    expect.assertions(1)
     try {
-      await loader.load(resolve("stubs/unknown.toml"))
+      await loader.load(resolve("stubs/unknown.js"))
     } catch (e) {
-      expect(e.code).toBe("ENOENT")
-      expect(e.errno).toBe(-2)
+      expect(e.code).toBe("MODULE_NOT_FOUND")
     }
   })
 
   it("loadSync success", () => {
     expect.assertions(1)
-    expect(loader.loadSync(resolve("stubs/toml.toml"))).toEqual(expected)
+    expect(loader.loadSync(resolve("stubs/js.js"))).toEqual(expected)
   })
 
   it("loadSync fail", () => {
-    expect.assertions(2)
+    expect.assertions(1)
     try {
-      loader.loadSync(resolve("stubs/unknown.toml"))
+      loader.loadSync(resolve("stubs/unknown.js"))
     } catch (e) {
-      expect(e.code).toBe("ENOENT")
-      expect(e.errno).toBe(-2)
+      expect(e.code).toBe("MODULE_NOT_FOUND")
     }
   })
 })

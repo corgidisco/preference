@@ -1,10 +1,12 @@
 
 import {} from "jest"
 
-import Preference from "../dist/Preference"
 import {resolve as pathResolve} from "path"
-import {Loader} from "../src/types"
 import * as dotenv from "dotenv"
+
+import {Preference} from "../dist/Preference"
+import {YamlLoader} from "../dist/loaders/yaml-loader"
+import {Loader} from "../src/types"
 
 function resolve(...dir: string[]): string {
   return pathResolve(__dirname, "..", ...dir)
@@ -81,7 +83,7 @@ describe("Preference.load", () => {
     path: resolve("test/stubs/service/.env"),
   })
 
-  const pref = new Preference()
+  const pref = new Preference({})
 
   it("will be success", async () => {
     expect.assertions(1)
@@ -102,7 +104,7 @@ describe("Preference.load", () => {
     expect.assertions(1)
     const yamlOnlyPref = new Preference({
       loaders: [
-        require("../dist/loader/yaml-loader").default,
+        new YamlLoader(),
       ],
     })
     await expect(yamlOnlyPref.load(resolve("test/stubs/service")))
@@ -141,7 +143,7 @@ describe("Preference.load", () => {
 
 describe("Preference.loadSync", () => {
 
-  const pref = new Preference()
+  const pref = new Preference({})
 
   it("will be success", () => {
     expect.assertions(1)
@@ -162,7 +164,7 @@ describe("Preference.loadSync", () => {
     expect.assertions(1)
     const yamlOnlyPref = new Preference({
       loaders: [
-        require("../dist/loader/yaml-loader").default,
+        new YamlLoader(),
       ],
     })
     expect(yamlOnlyPref.loadSync(resolve("test/stubs/service")))

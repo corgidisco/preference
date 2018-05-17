@@ -1,7 +1,7 @@
 
 import {} from "jest"
 
-import loader from "../../dist/loader/ini-loader"
+import {IniLoader} from "../../dist/loaders/ini-loader"
 import * as path from "path"
 
 function resolve(...dir: string[]): string {
@@ -20,6 +20,8 @@ const expected = {
 }
 
 describe("ini-loader", () => {
+
+  const loader = new IniLoader()
 
   it("load success", async () => {
     expect.assertions(1)

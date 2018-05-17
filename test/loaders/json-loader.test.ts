@@ -1,7 +1,7 @@
 
 import {} from "jest"
 
-import loader from "../../dist/loader/json-loader"
+import {JsonLoader} from "../../dist/loaders/json-loader"
 import * as path from "path"
 
 function resolve(...dir: string[]): string {
@@ -20,6 +20,8 @@ const expected = {
 }
 
 describe("json-loader", () => {
+
+  const loader = new JsonLoader()
 
   it("load success", async () => {
     expect.assertions(1)

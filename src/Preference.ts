@@ -1,30 +1,30 @@
 
 import {resolve as pathResolve, extname, basename} from "path"
+import * as events from "events"
 import * as fs from "./util/fs"
 import * as types from "./types"
-import yamlLoader from "./loader/yaml-loader"
-import jsonLoader from "./loader/json-loader"
-import iniLoader from "./loader/ini-loader"
-import tomlLoader from "./loader/toml-loader"
-import jsLoader from "./loader/js-loader"
+import * as loaders from "./loaders"
 
-export default class Preference {
+export class Preference extends events.EventEmitter {
+
+  public static shared = new Preference({})
 
   private options: types.PreferenceOptions
 
-  constructor(options?: types.PreferenceOptions) {
+  constructor(options: types.PreferenceOptions) {
+    super()
     this.options = Object.assign({
       loaders: [
-        yamlLoader,
-        jsonLoader,
-        tomlLoader,
-        iniLoader,
-        jsLoader,
+        new loaders.YamlLoader(),
+        new loaders.JsonLoader(),
+        new loaders.TomlLoader(),
+        new loaders.IniLoader(),
+        new loaders.JsLoader(),
       ],
     }, options)
   }
 
-  public async load(path: string): Promise<any> {
+  public async load<P>(path: string): Promise<P> {
     const result: any = {}
     for (const file of (await fs.readdir(path))) {
       try {
@@ -53,10 +53,10 @@ export default class Preference {
       }
     }
 
-    return result
+    return result as P
   }
 
-  public loadSync(path: string): any {
+  public loadSync<P>(path: string): P {
     const result: any = {}
 
     for (const file of fs.readdirSync(path)) {
@@ -85,6 +85,6 @@ export default class Preference {
         }
       }
     }
-    return result
+    return result as P
   }
 }
