@@ -1,7 +1,18 @@
 {
   "name": "preference",
-  "version": "0.1.1",
-  "description": "load all config files(yaml, json, toml, ini) and directory into one object",
+  "version": "0.2.0",
+  "description": "Load various config files(`yaml`, `json`, `toml`, `ini`) and directory into one object. support Javascript(& Typescript).",
+  "keywords": [
+    "config",
+    "conf",
+    "yaml",
+    "ini",
+    "toml",
+    "json",
+    "dotenv",
+    "env",
+    "typescript"
+  ],
   "author": "Cris <corgidisco@gmail.com>",
   "license": "MIT",
   "repository": {

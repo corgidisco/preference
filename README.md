@@ -6,7 +6,7 @@
 
 [![NPM](https://nodei.co/npm/preference.png)](https://www.npmjs.com/package/preference)
 
-Load all config files(`yaml`, `json`, `toml`, `ini`) and directory into one object. Typescript and Javascript support.
+Load various config files(`yaml`, `json`, `toml`, `ini`) and directory into one object. support Javascript(& Typescript).
 
 ## Install
 
