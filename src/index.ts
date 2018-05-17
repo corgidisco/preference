@@ -1,14 +1,15 @@
 
 import {Preference} from "./Preference"
-import * as types from "./types"
+import {PreferenceOptions} from "./types"
 
 export * from "./loaders"
+export * from "./types"
 
-export function create(options?: types.PreferenceOptions): Preference {
+export function create(options?: PreferenceOptions): Preference {
   return new Preference(options || {})
 }
 
 export default Preference.shared
 
-export const load = <P>(path: string) => Preference.shared.load<P>(path)
-export const loadSync = <P>(path: string) => Preference.shared.loadSync<P>(path)
+export const load = <P>(dirname: string) => Preference.shared.load<P>(dirname)
+export const loadSync = <P>(dirname: string) => Preference.shared.loadSync<P>(dirname)

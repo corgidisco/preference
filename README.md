@@ -17,14 +17,14 @@ npm install preference --save
 ## Usage
 
 ```js
-import pref from "preference" // const pref = require("preference") 
+import * as preference from "preference" // const pref = require("preference") 
 
 // promise
-pref.load("./your_config_directory").then(/* ... */)
-await pref.load("./your_config_directory") // you can use promise by await
+preference.load("./your_config_directory").then(/* ... */)
+await preference.load("./your_config_directory") // you can use promise by await
 
 // sync
-pref.loadSync("./your_config_directory")
+preference.loadSync("./your_config_directory")
 ```
 
 ## Examples
@@ -38,12 +38,12 @@ Example with `dotenv`.
 ```js
 const path = require("path")
 const dotenv = require("dotenv") // if you want to use dotenv
-const pref = require("preference")
+const preference = require("preference")
 
 dotenv.config({
   path: path.resolve(process.cwd(), "config/.env")
 })
-pref.load(path.resolve(process.cwd(), "config")).then(config => {
+preference.load(path.resolve(process.cwd(), "config")).then(config => {
   console.log(config) // output
 })
 ```
@@ -94,3 +94,26 @@ pref.load(path.resolve(process.cwd(), "config")).then(config => {
 - `ini` (require `npm install ini --save`)
 - `yaml` (require `npm install js-yaml --save`)
 - `toml` (require `npm install toml --save`)
+
+## Custom Loader
+
+```ts
+const customLoader: preference.Loader = {
+  test(filename: string): boolean {
+    return /\.json$/i.test(filename)
+  },
+  async load(dirname: string): Promise<any> {
+    return {message: "load async", dirname}
+  },
+  loadSync(dirname: string): any {
+    return {message: "load sync", dirname}
+  },
+}
+
+const pref = preference.create({
+  loaders: [
+    customLoader,
+    new preference.YamlLoader(),
+  ],
+})
+```
