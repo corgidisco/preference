@@ -45,7 +45,7 @@ describe("readme", () => {
       },
       slave: {
         message: "load async",
-        dirname: "/Users/wan2land/Workspace/wandu/preference.ts/test/stubs/service/database/slave.json",
+        dirname: `${__dirname}/stubs/service/database/slave.json`,
       },
     })
   })
