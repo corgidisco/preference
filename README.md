@@ -100,7 +100,7 @@ preference.load(path.resolve(process.cwd(), "config")).then(config => {
 
 - `js` (built-in)
 - `json` (built-in)
-- `ini` (require `npm install ini --save`)
+- `ini`, `cfg`, `conf` (require `npm install ini --save`)
 - `yaml` (require `npm install js-yaml --save`)
 - `toml` (require `npm install toml --save`)
 
