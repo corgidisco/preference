@@ -61,13 +61,24 @@ preference.load(path.resolve(process.cwd(), "config")).then(config => {
 
 @code("./test/expected.json")
 
-## Formats
+## Support Formats
 
 - `js` (built-in)
 - `json` (built-in)
 - `ini` (require `npm install ini --save`)
 - `yaml` (require `npm install js-yaml --save`)
 - `toml` (require `npm install toml --save`)
+
+## Configs
+
+```typescript
+preference.create(/* preference.PreferenceConfig */)
+```
+
+option         | type                 | default
+-------------- | -------------------- | ------------------------------------------------
+noIgnoreErrors | boolean              | `false`
+loaders        | preference.Loader[]  | `[YamlLoader, JsonLoader, TomlLoader, IniLoader, JsLoader]`
 
 ## Custom Loader
 
