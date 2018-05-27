@@ -1,16 +1,19 @@
 
 import * as path from "path"
-import * as fs from "./util/fs"
-import * as types from "./types"
-import * as loaders from "./loaders"
+import * as fs from "../util/fs"
+import * as types from "../types"
+import * as loaders from "../loaders"
+
+export interface PreferenceConfig {
+  noIgnoreErrors?: boolean // default false
+  loaders?: types.Loader[]
+}
 
 export class Preference {
 
-  public static shared = new Preference({})
+  private options: PreferenceConfig
 
-  private options: types.PreferenceOptions
-
-  constructor(options: types.PreferenceOptions) {
+  constructor(options: PreferenceConfig) {
     this.options = Object.assign({
       loaders: [
         new loaders.YamlLoader(),

@@ -4,52 +4,19 @@ import {} from "jest"
 import {resolve as pathResolve} from "path"
 import * as dotenv from "dotenv"
 
-import {Preference} from "../dist/Preference"
-import {YamlLoader} from "../dist/loaders/yaml-loader"
-import {Loader} from "../src/types"
+import {Preference} from "../../dist/preference/preference"
+import {YamlLoader} from "../../dist/loaders/yaml-loader"
+import {Loader} from "../../dist/types"
 
 function resolve(...dir: string[]): string {
-  return pathResolve(__dirname, "..", ...dir)
+  return pathResolve(__dirname, "../..", ...dir)
 }
 
 dotenv.config({
   path: resolve("test/stubs/service"),
 })
 
-const expected = {
-  cache: {
-    default: {
-      username: "cache",
-      password: "cache123",
-    },
-  },
-  client: {
-    api: {
-      host: "127.0.0.1",
-      middleware: [
-        "cors",
-        "auth",
-      ],
-      port: "8080",
-    },
-  },
-  database: {
-    keyvalue: {
-      host: "localhost",
-      port: 6379,
-    },
-    master: {
-      host: "localhost",
-      username: "master",
-      password: "master123",
-    },
-    slave: {
-      host: "slavehost",
-      username: "slave",
-      password: "slave123",
-    },
-  },
-}
+const expected = require("../expected.json") // tslint:disable-line
 
 const yamlOnlyPrefExpected = {
   database: {

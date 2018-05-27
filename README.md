@@ -17,9 +17,17 @@ npm install preference --save
 
 ## Usage
 
-```js
-import * as preference from "preference" // const pref = require("preference") 
+import library,
 
+```ts
+const preference = require("preference") 
+// or
+import * as preference from "preference" // typescript
+```
+
+then, use like this:
+
+```js
 // promise
 preference.load("./your_config_directory").then(/* ... */)
 await preference.load("./your_config_directory") // you can use promise by await
@@ -65,7 +73,7 @@ preference.load(path.resolve(process.cwd(), "config")).then(config => {
       "port": "8080",
       "middleware": [
         "cors",
-        "auth",
+        "auth"
       ]
     }
   },

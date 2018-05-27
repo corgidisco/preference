@@ -1,0 +1,34 @@
+{
+  "cache": {
+    "default": {
+      "username": "cache",
+      "password": "cache123"
+    }
+  },
+  "client": {
+    "api": {
+      "host": "127.0.0.1",
+      "port": "8080",
+      "middleware": [
+        "cors",
+        "auth"
+      ]
+    }
+  },
+  "database": {
+    "keyvalue": {
+      "host": "localhost",
+      "port": 6379
+    },
+    "master": {
+      "host": "localhost",
+      "username": "master",
+      "password": "master123"
+    },
+    "slave": {
+      "host": "slavehost",
+      "username": "slave",
+      "password": "slave123"
+    }
+  }
+}

@@ -1,15 +1,25 @@
 
-import {Preference} from "./Preference"
-import {PreferenceOptions} from "./types"
+import {create} from "./preference/create"
+import {Preference, PreferenceConfig} from "./preference/preference"
+import {IniLoader, JsLoader, JsonLoader, TomlLoader, YamlLoader} from "./loaders"
+import {Loader} from "./types"
 
-export * from "./loaders"
-export * from "./types"
+const shared = create()
 
-export function create(options?: PreferenceOptions): Preference {
-  return new Preference(options || {})
+const load = <P>(dirname: string) => shared.load<P>(dirname)
+const loadSync = <P>(dirname: string) => shared.loadSync<P>(dirname)
+
+export {
+  create,
+  shared,
+  load,
+  loadSync,
+  Preference,
+  PreferenceConfig,
+  IniLoader,
+  JsLoader,
+  JsonLoader,
+  TomlLoader,
+  YamlLoader,
+  Loader,
 }
-
-export default Preference.shared
-
-export const load = <P>(dirname: string) => Preference.shared.load<P>(dirname)
-export const loadSync = <P>(dirname: string) => Preference.shared.loadSync<P>(dirname)

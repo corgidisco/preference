@@ -1,12 +1,8 @@
 
 import {} from "jest"
 
-import {JsLoader} from "../../dist/loaders/js-loader"
 import * as path from "path"
-
-function resolve(...dir: string[]): string {
-  return path.resolve(__dirname, "..", ...dir)
-}
+import {JsLoader} from "../../dist/loaders/js-loader"
 
 const expected = {
   array: [10, 20, 30],
@@ -25,13 +21,13 @@ describe("js-loader", () => {
 
   it("load success", async () => {
     expect.assertions(1)
-    await expect(loader.load(resolve("stubs/js.js"))).resolves.toEqual(expected)
+    await expect(loader.load(path.resolve(__dirname, "../stubs/js.js"))).resolves.toEqual(expected)
   })
 
   it("load fail", async () => {
     expect.assertions(1)
     try {
-      await loader.load(resolve("stubs/unknown.js"))
+      await loader.load(path.resolve(__dirname, "../stubs/unknown.js"))
     } catch (e) {
       expect(e.code).toBe("MODULE_NOT_FOUND")
     }
@@ -39,13 +35,13 @@ describe("js-loader", () => {
 
   it("loadSync success", () => {
     expect.assertions(1)
-    expect(loader.loadSync(resolve("stubs/js.js"))).toEqual(expected)
+    expect(loader.loadSync(path.resolve(__dirname, "../stubs/js.js"))).toEqual(expected)
   })
 
   it("loadSync fail", () => {
     expect.assertions(1)
     try {
-      loader.loadSync(resolve("stubs/unknown.js"))
+      loader.loadSync(path.resolve(__dirname, "../stubs/unknown.js"))
     } catch (e) {
       expect(e.code).toBe("MODULE_NOT_FOUND")
     }
