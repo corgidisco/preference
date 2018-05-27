@@ -40,8 +40,8 @@ describe("readme", () => {
       keyvalue: { host: "localhost", port: 6379 },
       master: {
         host: "localhost",
-        username: "master",
-        password: "master123",
+        username: "defaultuser",
+        password: "defaultpass",
       },
       slave: {
         message: "load async",

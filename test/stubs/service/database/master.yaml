@@ -1,4 +1,4 @@
 
 host: localhost
-username: <%=process.env.MASTER_USERNAME%>
-password: <%=process.env.MASTER_PASSWORD%>
+username: defaultuser
+password: defaultpass

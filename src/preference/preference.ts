@@ -4,6 +4,17 @@ import * as fs from "../util/fs"
 import * as types from "../types"
 import * as loaders from "../loaders"
 
+function merge(obj1: any, obj2: any): any {
+  for (const key of Object.keys(obj2)) {
+    if (typeof obj1[key] === "object" && typeof obj2[key] === "object") {
+      obj1[key] = merge(obj1[key], obj2[key])
+    } else {
+      obj1[key] = obj2[key]
+    }
+  }
+  return obj1
+}
+
 export interface PreferenceConfig {
   noIgnoreErrors?: boolean // default false
   loaders?: types.Loader[]
@@ -27,25 +38,40 @@ export class Preference {
 
   public async load<P>(dirname: string): Promise<P> {
     const result: any = {}
-    for (const file of (await fs.readdir(dirname))) {
+    const filenames = await fs.readdir(dirname)
+    const files = (await Promise.all(filenames.map(async (fileName) => {
+      const filePath = path.resolve(dirname, fileName)
+      const fileObj = await fs.lstat(filePath)
+      return {
+        name: fileName,
+        path: filePath,
+        isFile: fileObj.isFile(),
+      }
+    }))).sort((file1, file2) => {
+      if (file1.isFile === file2.isFile) {
+        return 0
+      }
+      return file1.isFile ? 1 : -1
+    })
+
+    for (const file of files) {
       try {
-        const filePath = path.resolve(dirname, file)
-        const fileObj = await fs.lstat(filePath)
-        if (fileObj.isFile()) {
-          const fileExt = path.extname(filePath)
+        if (file.isFile) {
+          const fileExt = path.extname(file.path)
           for (const loader of this.options.loaders || []) {
-            if (loader.test(file)) {
-              const base = path.basename(filePath, fileExt)
-              if (base === file) { // name is null
-                Object.assign(result, await loader.load(filePath))
+            if (loader.test(file.name)) {
+              const base = path.basename(file.path, fileExt)
+              if (base === file.name) { // name is null
+                merge(result, await loader.load(file.path))
               } else {
-                result[base] = await loader.load(filePath)
+                result[base] = merge(result[base] || {}, await loader.load(file.path))
               }
               break
             }
           }
         } else {
-          result[path.basename(filePath)] = await this.load(filePath)
+          const base = path.basename(file.path)
+          result[base] = merge(result[base] || {}, await this.load(file.path))
         }
       } catch (e) {
         if (this.options.noIgnoreErrors) {
@@ -59,26 +85,39 @@ export class Preference {
 
   public loadSync<P>(dirname: string): P {
     const result: any = {}
+    const files = fs.readdirSync(dirname).map(fileName => {
+      const filePath = path.resolve(dirname, fileName)
+      const fileObj = fs.lstatSync(filePath)
+      return {
+        name: fileName,
+        path: filePath,
+        isFile: fileObj.isFile(),
+      }
+    }).sort((file1, file2) => {
+      if (file1.isFile === file2.isFile) {
+        return 0
+      }
+      return file1.isFile ? 1 : -1
+    })
 
-    for (const file of fs.readdirSync(dirname)) {
+    for (const file of files) {
       try {
-        const filePath = path.resolve(dirname, file)
-        const fileObj = fs.lstatSync(filePath)
-        if (fileObj.isFile()) {
-          const fileExt = path.extname(filePath)
+        if (file.isFile) {
+          const fileExt = path.extname(file.path)
           for (const loader of this.options.loaders || []) {
-            if (loader.test(file)) {
-              const base = path.basename(filePath, fileExt)
-              if (base === file) { // name is null
-                Object.assign(result, loader.loadSync(filePath))
+            if (loader.test(file.name)) {
+              const base = path.basename(file.path, fileExt)
+              if (base === file.name) { // name is null
+                merge(result, loader.loadSync(file.path))
               } else {
-                result[base] = loader.loadSync(filePath)
+                result[base] = merge(result[base] || {}, loader.loadSync(file.path))
               }
               break
             }
           }
         } else {
-          result[path.basename(filePath)] = this.loadSync(filePath)
+          const base = path.basename(file.path)
+          result[base] = merge(result[base] || {}, this.loadSync(file.path))
         }
       } catch (e) {
         if (this.options.noIgnoreErrors) {

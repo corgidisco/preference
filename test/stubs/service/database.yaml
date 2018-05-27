@@ -1,0 +1,4 @@
+
+master:
+  username: <%=process.env.MASTER_USERNAME%> # override
+  password: <%=process.env.MASTER_PASSWORD%> # override
