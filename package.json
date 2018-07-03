@@ -1,6 +1,6 @@
 {
   "name": "preference",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Load various config files(`yaml`, `json`, `toml`, `ini`) and directory into one object. support Javascript(& Typescript).",
   "keywords": [
     "config",
