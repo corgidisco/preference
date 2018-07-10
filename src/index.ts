@@ -1,7 +1,13 @@
 
+import {
+  IniLoader,
+  JsLoader,
+  JsonLoader,
+  TomlLoader,
+  YamlLoader,
+} from "./loaders"
 import {create} from "./preference/create"
 import {Preference, PreferenceConfig} from "./preference/preference"
-import {IniLoader, JsLoader, JsonLoader, TomlLoader, YamlLoader} from "./loaders"
 import {Loader} from "./types"
 
 const shared = create()

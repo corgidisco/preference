@@ -1,8 +1,8 @@
 
 import * as path from "path"
-import * as fs from "../util/fs"
-import * as types from "../types"
 import * as loaders from "../loaders"
+import * as types from "../types"
+import * as fs from "../util/fs"
 
 function merge(obj1: any, obj2: any): any {
   for (const key of Object.keys(obj2)) {

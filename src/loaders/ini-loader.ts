@@ -1,7 +1,7 @@
 
-import * as fs from "../util/fs"
 import * as template from "../template"
 import * as types from "../types"
+import * as fs from "../util/fs"
 
 function parse(contents: Buffer): string {
   return require("ini").decode(template.createWithCache(contents.toString())({}))
