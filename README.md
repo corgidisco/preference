@@ -1,4 +1,4 @@
-# Preference
+# ⚙️ Preference
 
 [![Build](https://travis-ci.org/corgidisco/preference.svg?branch=master)](https://travis-ci.org/corgidisco/preference)
 [![Downloads](https://img.shields.io/npm/dt/preference.svg)](https://npmcharts.com/compare/preference?minimal=true)
