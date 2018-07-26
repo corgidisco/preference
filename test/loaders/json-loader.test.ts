@@ -1,8 +1,9 @@
 
-import {} from "jest"
+import "jest"
 
-import {JsonLoader} from "../../dist/loaders/json-loader"
 import * as path from "path"
+
+import { JsonLoader } from "../../dist/loaders/json-loader"
 
 function resolve(...dir: string[]): string {
   return path.resolve(__dirname, "..", ...dir)

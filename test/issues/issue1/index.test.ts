@@ -1,6 +1,7 @@
 
-import * as pref from "../../../dist/index"
 import * as path from "path"
+
+import * as pref from "../../../dist/index"
 
 describe("issue1", () => {
 

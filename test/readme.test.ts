@@ -1,10 +1,11 @@
 
-import {} from "jest"
+import "jest"
 
-import * as preference from "../dist/index"
-
-import * as path from "path"
 import * as dotenv from "dotenv"
+import * as path from "path"
+
+import * as preference from "../dist"
+
 
 describe("readme", () => {
 

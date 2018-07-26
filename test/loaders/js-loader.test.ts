@@ -1,8 +1,9 @@
 
-import {} from "jest"
+import "jest"
 
 import * as path from "path"
-import {JsLoader} from "../../dist/loaders/js-loader"
+
+import { JsLoader } from "../../dist/loaders/js-loader"
 
 const expected = {
   array: [10, 20, 30],

@@ -1,8 +1,9 @@
 
-import {} from "jest"
+import "jest"
 
-import {IniLoader} from "../../dist/loaders/ini-loader"
 import * as path from "path"
+
+import { IniLoader } from "../../dist/loaders/ini-loader"
 
 function resolve(...dir: string[]): string {
   return path.resolve(__dirname, "..", ...dir)

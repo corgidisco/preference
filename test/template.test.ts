@@ -1,7 +1,7 @@
 
-import {} from "jest"
+import "jest"
 
-import {create} from "../dist/template"
+import { create } from "../dist/template"
 
 describe("template", () => {
 

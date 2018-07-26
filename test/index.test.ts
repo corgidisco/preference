@@ -1,9 +1,10 @@
 
-import {} from "jest"
+import "jest"
 
-import * as preference from "../dist/index"
-import * as path from "path"
 import * as dotenv from "dotenv"
+import * as path from "path"
+
+import * as preference from "../dist"
 
 function resolve(...dir: string[]): string {
   return path.resolve(__dirname, "..", ...dir)

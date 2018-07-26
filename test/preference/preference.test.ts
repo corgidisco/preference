@@ -1,11 +1,11 @@
 
-import {} from "jest"
+import "jest"
 
-import {resolve as pathResolve} from "path"
 import * as dotenv from "dotenv"
+import {resolve as pathResolve} from "path"
 
-import {Preference} from "../../dist/preference/preference"
 import {YamlLoader} from "../../dist/loaders/yaml-loader"
+import {Preference} from "../../dist/preference/preference"
 import {Loader} from "../../dist/types"
 
 function resolve(...dir: string[]): string {
