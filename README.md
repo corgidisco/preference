@@ -5,6 +5,9 @@
 [![Version](https://img.shields.io/npm/v/preference.svg)](https://www.npmjs.com/package/preference)
 [![License](https://img.shields.io/npm/l/preference.svg)](https://www.npmjs.com/package/preference)
 
+[![dependencies Status](https://david-dm.org/corgidisco/preference/status.svg)](https://david-dm.org/corgidisco/preference)
+[![devDependencies Status](https://david-dm.org/corgidisco/preference/dev-status.svg)](https://david-dm.org/corgidisco/preference?type=dev)
+
 [![NPM](https://nodei.co/npm/preference.png)](https://www.npmjs.com/package/preference)
 
 Load various config files(`yaml`, `json`, `toml`, `ini`) and directory into one object. support Javascript(& Typescript).
